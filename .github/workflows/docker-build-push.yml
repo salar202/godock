@@ -34,10 +34,8 @@ jobs:
             script: |
              sudo -i << 'EOF'
              container_id=$(docker ps -q --filter ancestor=salar202/slr:latest)
-             if [ ! -z "$container_id" ]; then
-                docker stop $container_id || true
-                docker rm $container_id || true
-             fi
+             docker stop $container_id 
+             docker rm $container_id
              docker pull salar202/slr:latest
              docker run -d -p 8080:8080 --name slr salar202/slr:latest
              EOF
