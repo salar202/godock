@@ -32,12 +32,12 @@ jobs:
             username: ${{ secrets.EC2_USERNAME }}
             key: ${{ secrets.EC2_SSH_KEY }}
             script: |
-                    sudo -i << 'EOF'
-                    docker pull $DOCKER_USERNAME/slr:latest
-                    container_id=$(docker ps -q --filter ancestor=$DOCKER_USERNAME/slr:latest)
-                    if [ ! -z "$container_id" ]; then
-                    docker stop $container_id || true
-                    docker rm $container_id || true
-                    fi
-                    docker run -d -p 8080:8080 --name slr $DOCKER_USERNAME/slr:latest
-                    EOF
+             sudo -i << 'EOF'
+             docker pull $DOCKER_USERNAME/slr:latest
+             container_id=$(docker ps -q --filter ancestor=$DOCKER_USERNAME/slr:latest)
+             if [ ! -z "$container_id" ]; then
+                docker stop $container_id || true
+                docker rm $container_id || true
+             fi
+             docker run -d -p 8080:8080 --name slr $DOCKER_USERNAME/slr:latest
+             EOF
