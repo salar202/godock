@@ -34,9 +34,7 @@ jobs:
             script: |
              sudo -i << 'EOF'
               docker pull salar202/slr:latest
-              
               docker stop mydocker
               docker rm mydocker
-             
               docker run -d -p 8080:8080 --name mydocker salar202/slr:latest
               EOF
