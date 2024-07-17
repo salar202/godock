@@ -26,13 +26,13 @@ jobs:
           docker buildx build --platform linux/amd64 -t $DOCKER_USERNAME/slr:latest --push .
 
       - name: SSH into EC2 instance and deploy
-              sudo -i 
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            sudo -i
             docker pull $DOCKER_USERNAME/slr:latest
             docker stop slr || true
             docker rm slr || true
