@@ -39,5 +39,5 @@ jobs:
                 docker stop $container_id || true
                 docker rm $container_id || true
              fi
-             docker run -d -p 8080:8080 --name slr $DOCKER_USERNAME/slr:latest
+             docker run -d -p 8080:8080 --name slr salar202/slr:latest
              EOF
