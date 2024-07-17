@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             sudo -i
-            docker pull $DOCKER_USERNAME/slr:latest
-            docker stop slr || true
-            docker rm slr || true
-            docker run -d -p 8080:8080 --name slr $DOCKER_USERNAME/slr:latest
+            sudo docker pull $DOCKER_USERNAME/slr:latest
+            sudo docker stop $(docker ps -q --filter ancestor=$DOCKER_USERNAME/slr:latest)
+            sudo docker rm slr || true
+            sudo docker run -d -p 8080:8080 --name slr $DOCKER_USERNAME/slr:latest
