@@ -23,5 +23,4 @@ jobs:
         run: |
           docker buildx create --use
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker buildx build --platform linux/amd64 -t $DOCKER_USERNAME/slr:latest .
-          docker push $DOCKER_USERNAME/slr:latest --push .
+          docker buildx build --platform linux/amd64 -t $DOCKER_USERNAME/slr:latest --push .
