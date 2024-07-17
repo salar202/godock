@@ -33,9 +33,11 @@ jobs:
             key: ${{ secrets.EC2_SSH_KEY }}
             script: |
              sudo -i << 'EOF'
-             container_id=$(docker ps -q --filter ancestor=salar202/slr:latest)
-             docker stop $container_id 
-             docker rm $container_id
-             docker pull salar202/slr:latest
-             docker run -d -p 8080:8080 --name slr salar202/slr:latest
-             EOF
+             container_id=$(docker ps -aqf "name=slr")
+              if [ ! -z "$container_id" ]; then
+                docker stop "$container_id" || true
+                docker rm "$container_id" || true
+              fi
+              docker pull salar202/slr:latest
+              docker run -d -p 8080:8080 --name slr salar202/slr:latest
+              EOF
